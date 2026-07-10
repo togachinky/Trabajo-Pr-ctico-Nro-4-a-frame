@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trabajo Práctico 4 - VR</title>
+
+<script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+<script src="https://unpkg.com/@c-frame/aframe-physics-system@4.2.3/dist/aframe-physics-system.min.js"></script>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background-image:url('https://raw.githubusercontent.com/togachinky/Trabajo-Pr-ctico-Nro-4-a-frame/main/fondo-bandera.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+</style>
+
+</head>
+
+<body>
+
+<img
+    class="logo"
+    src="https://raw.githubusercontent.com/togachinky/Trabajo-Pr-ctico-Nro-4-a-frame/main/LOGO.png"
+    width="160"
+    height="100">
+<button id="playButton"
+style="
+position:absolute;
+z-index:9999;
+top:20px;
+right:20px;
+padding:15px;
+font-size:18px;">
+🎵 Iniciar experiencia
+</button>
+<a-scene
+    physics="gravity: -9.8"
+    vr-mode-ui="enabled: true"
+    webxr="optionalFeatures: local-floor, bounded-floor, hand-tracking">
+
+    <!-- Recursos -->
+    <a-assets>
+
+        <audio
+            id="musica"
+            src="https://raw.githubusercontent.com/togachinky/Trabajo-Pr-ctico-Nro-4-a-frame/main/11.mp3">
+        </audio>
+
+        <a-asset-item
+            id="pelotas"
+            src="https://raw.githubusercontent.com/togachinky/Trabajo-Pr-ctico-Nro-4-a-frame/main/pelotas.glb">
+        </a-asset-item>
+
+        <a-asset-item
+            id="messi"
+            src="https://raw.githubusercontent.com/togachinky/Trabajo-Pr-ctico-Nro-4-a-frame/main/messi.glb">
+        </a-asset-item>
+
+    </a-assets>
+
+   
+
+    <!-- Audio -->
+    <a-entity
+        sound="
+            src:#musica;
+            autoplay:true;
+            loop:true;
+            volume:3;
+            positional:false">
+    </a-entity>
+
+    <!-- Luces -->
+    <a-light
+        type="ambient"
+        intensity="1.3">
+    </a-light>
+
+    <a-light
+        type="directional"
+        position="5 10 5"
+        intensity="2">
+    </a-light>
+
+    <!-- Piso -->
+    <a-plane
+        position="0 0 -3"
+        rotation="-90 0 0"
+        width="20"
+        height="20"
+        color="#FCBF49"
+        static-body>
+    </a-plane>
+
+    <!-- Cajas -->
+    <a-box
+        position="-2 4 -3"
+        rotation="0 45 0"
+        color="#FFFFFF"
+        dynamic-body>
+    </a-box>
+
+    <a-box
+        position="-5 4 -5"
+        rotation="0 45 0"
+        color="#6CACE4"
+        dynamic-body>
+    </a-box>
+
+    <a-box
+        position="2 4 -3"
+        rotation="0 45 0"
+        color="#6CACE4"
+        dynamic-body>
+    </a-box>
+
+    <a-box
+        position="5 4 -5"
+        rotation="0 45 0"
+        color="#FFFFFF"
+        dynamic-body>
+    </a-box>
+
+    <!-- Paneles -->
+    <a-plane
+        position="-0.4 6 -7.9"
+        width="14"
+        height="1.5"
+        color="#FFFFFF">
+    </a-plane>
+
+    <a-text
+        value="Profesor/a: Marquez Camila Araceli - Togachinky Daniel Abraham"
+        position="-6.3 6 -7.8"
+        width="13"
+        color="#0000FF">
+    </a-text>
+
+    <a-plane
+        position="0 4 -7.9"
+        width="8"
+        height="1.5"
+        color="#FFFFFF">
+    </a-plane>
+
+    <a-text
+        value="Tutora: Liliana Ocampo"
+        position="-2.8 4 -7.8"
+        width="10"
+        color="#FF0000">
+    </a-text>
+
+    <a-plane
+        position="0 2 -8"
+        width="8"
+        height="0.9"
+        color="#FFFFFF">
+    </a-plane>
+
+    <a-text
+        value="U.T.N. Facultad Regional Resistencia"
+        position="-3.8 2 -7.9"
+        width="10"
+        color="#008000">
+    </a-text>
+
+    <a-plane
+        position="-0.5 0.8 -8"
+        width="5"
+        height="0.9"
+        color="#FFFFFF">
+    </a-plane>
+
+    <a-text
+        value="CICLO LECTIVO 2026"
+        position="-2.2 0.8 -7.9"
+        width="8"
+        color="#800080">
+    </a-text>
+
+    <!-- Pelotas -->
+    <a-entity
+        gltf-model="#pelotas"
+        position="3 0.5 -7"
+        scale="1 1 1">
+    </a-entity>
+
+    <!-- Messi -->
+    <a-entity
+        gltf-model="#messi"
+        position="-4 2 -6"
+        rotation="0 30 0"
+        scale="2 2 2">
+    </a-entity>
+
+    <!-- Rig VR -->
+    <a-entity id="rig" position="0 0 1">
+
+        <a-entity
+            camera
+            position="0 1.6 0"
+            look-controls
+            wasd-controls>
+        </a-entity>
+
+        <!-- Control izquierdo -->
+        <a-entity
+            laser-controls="hand: left"
+            raycaster="objects: .interactable">
+        </a-entity>
+
+        <!-- Control derecho -->
+        <a-entity
+            laser-controls="hand: right"
+            raycaster="objects: .interactable">
+        </a-entity>
+
+    </a-entity>
+
+</a-scene>
+
+</body>
+</html>
