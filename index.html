@@ -10,6 +10,7 @@
 <script src="https://unpkg.com/@c-frame/aframe-physics-system@4.2.3/dist/aframe-physics-system.min.js"></script>
 
 <style>
+
 body{
     margin:0;
     overflow:hidden;
@@ -21,14 +22,29 @@ body{
 </style>
 
 </head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
 
+    const boton = document.getElementById("playButton");
+    const musica = document.getElementById("musica3d");
+
+    boton.addEventListener("click", () => {
+
+        const audio = document.querySelector("#musica");
+
+        audio.play().catch(err => {
+            console.log("Error reproduciendo audio:", err);
+        });
+
+        musica.components.sound.playSound();
+
+        boton.style.display = "none";
+    });
+
+});
+</script>
 <body>
 
-<img
-    class="logo"
-    src="https://raw.githubusercontent.com/togachinky/Trabajo-Pr-ctico-Nro-4-a-frame/main/LOGO.png"
-    width="160"
-    height="100">
 <button id="playButton"
 style="
 position:absolute;
@@ -37,8 +53,15 @@ top:20px;
 right:20px;
 padding:15px;
 font-size:18px;">
-🎵 Iniciar experiencia
+🎵 Iniciar audio
 </button>
+
+<img
+    class="logo"
+    src="https://raw.githubusercontent.com/togachinky/Trabajo-Pr-ctico-Nro-4-a-frame/main/LOGO.png"
+    width="160"
+    height="100">
+
 <a-scene
     physics="gravity: -9.8"
     vr-mode-ui="enabled: true"
@@ -70,9 +93,9 @@ font-size:18px;">
     <a-entity
         sound="
             src:#musica;
-            autoplay:true;
+            autoplay:false;
             loop:true;
-            volume:3;
+            volume:1;
             positional:false">
     </a-entity>
 
