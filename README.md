@@ -1,7 +1,10 @@
 Trabajo
 Práctico Nro. 4
+
 L IC. PR OF . L I L IA N A E . O CA M PO
+
 L I C E N C I A T U R A E N T E C N O L O G Í A E D U C A T I V A
+
 Trabajo Práctico: Desarrollo de una escena de Realidad Virtual con integración
 STEAM
 Actividades:
